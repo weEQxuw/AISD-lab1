@@ -31,7 +31,7 @@ namespace set
 
 	void print(Node* root)
 	{
-		if (root != nullptr)
+		if (root)
 		{
 			print(root->_left);
 			cout << root->_value << " ";
@@ -41,7 +41,6 @@ namespace set
 	}
 
 	
-
 
 	class Set
 	{
@@ -96,21 +95,21 @@ namespace set
 
 		}
 
-		void print_set()
+		void print_set() const
 		{
-			return print(_root);
+			print(_root);
 		}
 
 		bool contains(int key) const
 		{
 			Node* ptr = _root;
 
-			while (ptr != nullptr && ptr->_value == key)
+			while (ptr && ptr->_value != key)
 			{
-				if (key < ptr->_value)
-					ptr = ptr->_left;
-				else
-					ptr = ptr->_right;
+					if (key < ptr->_value)
+						ptr = ptr->_left;
+					else
+						ptr = ptr->_right;
 			}
 
 			return ptr != nullptr;
@@ -119,18 +118,18 @@ namespace set
 
 		bool insert(int value)
 		{
-			if (_root == nullptr)
+			if (!_root)
 			{
 				_root = new Node(value);
 				return true;
 			}
 
-			if (contains(value) == true)
+			if (this->contains(value))
 				return false;
 
 			Node* ptr = _root;
 
-			while (ptr != nullptr)
+			while (ptr)
 			{
 				if (value < ptr->_value && ptr->_left == nullptr)
 				{
@@ -177,9 +176,9 @@ namespace set
 				if (ptr != _root)
 				{
 					if (pre_ptr->_left == ptr)
-						pre_ptr->_left == nullptr;
+						pre_ptr->_left = nullptr;
 					else
-						pre_ptr->_right == nullptr;
+						pre_ptr->_right = nullptr;
 				}
 				else
 					_root = nullptr;
@@ -205,7 +204,7 @@ namespace set
 
 				if (pre_ptr->_right == ptr)
 				{
-					pre_ptr->_right == ptr->_right;
+					pre_ptr->_right = ptr->_right;
 				}
 
 				delete ptr;
